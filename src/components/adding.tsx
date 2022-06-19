@@ -1,8 +1,8 @@
 import React, { Component, SyntheticEvent } from 'react';
 import { connect } from 'react-redux';
-import { addTodo } from './actions/actions';
+import { addTodo } from '../actions/actions';
 
-class App extends Component {
+class Adding extends Component {
 
   constructor(props){
     super(props);
@@ -25,16 +25,11 @@ handleSubmit(e:SyntheticEvent){
     task: this.state.task
   }
   this.props.newTask(task);
-
-  })
 }
 
 render() {
  return(
   <div>
-    <ul>
-      {this.props.tasks.map((tasks, i) => <li key={i}>{tasks.task}</li>)}
-    </ul>
     <form onSubmit={this.handleSubmit}>
       <input type="text" onChange={this.handleChange} />
       <input type="submit"/>
@@ -44,16 +39,10 @@ render() {
 }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    tasks: state.tasks
-  }
-};
-
 const mapDispatchToProps = (dispatch) => {
   return {
     newTask: task => dispatch(addTodo(task))
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(Adding);
